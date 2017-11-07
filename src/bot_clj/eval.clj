@@ -36,6 +36,8 @@
 
 (defstate sandbox
           :start (cjc/sandbox (conj cjt/secure-tester-without-def
+                                    (cjt/blanket "mount")
+                                    (cjt/blanket "aero")
                                     (cjt/blanket "bot-clj")
                                     (cjt/blanket "clj-symphony"))
                               :timeout evaluation-timeout-ms))
