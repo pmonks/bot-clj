@@ -13,10 +13,6 @@ in a secure sandbox.  Heavily inspired by [verma/clj-slackbot](https://github.co
 
 For now Clojure bot is available in source form only, so fire up your favourite git client and get cloning!
 
-The bot is also running in the production Symphony network, hosted in the [Foundation's production pod](https://foundation.symphony.com).
-It is not yet enabled for cross-pod communication (so users in other pods cannot yet see it), but the intention is to enable
-this as soon as the project is [Released](https://symphonyoss.atlassian.net/wiki/spaces/FM/pages/62783529/Released).
-
 ## Configuration
 
 Clojure bot is configured via a single, optional [EDN](https://github.com/edn-format/edn) file that may be specified on the
