@@ -63,8 +63,7 @@ The configuration file is structured as follows:
     "host" "<jolokia-server-host>"
     "port" "<jolokia-server-port-as-a-string>"
   }
-  :evaluation-timeout <seconds>    ; Optional - defaults to 5 seconds
-  :security-policy-file "<path to Java security policy file>"    ; Optional - defaults to none
+  :evaluation-timeout <seconds>    ; Optional - defaults to 10 seconds
   :accept-connections-interval <minutes>    ; Optional - defaults to 30 minutes
   :admin-emails ["user1@domain.tld" "user2@domain.tld"]    ; Optional
 }
@@ -108,7 +107,7 @@ security manager is enabled is too restrictive for the bot to function.
 
 A [sample policy file is provided](https://github.com/pmonks/bot-clj/blob/master/.java.policy.sample) as an example - you can
 copy this file to your home directory to test the bot out, **but be aware that this policy does not restrict anything** (it is
-equivalent to the JVM running without a security manager enabled).
+approximately equivalent to the JVM running without a security manager enabled).
 
 While Clojure-level sandboxing is always used (via [clojails](https://github.com/Raynes/clojail)), it is recommended that the
 JVM security sandbox be carefully configured in production environments as well, to provide defence in depth.
