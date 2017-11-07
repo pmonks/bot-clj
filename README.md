@@ -94,19 +94,22 @@ specified, defaults to 30 minutes.
 A list of administrator email addresses.  These users will be able to interact with the bot via ChatOps (1:1 chats with the bot
 in Symphony).  Administrators should say `help` to the bot to get a list of the available admin commands.
 
-### Java Security Policy Configuration
+### Java Security Configuration
 
-This bot leverages the [Java security manager](https://docs.oracle.com/javase/8/docs/technotes/guides/security/index.html) as
-part of sandboxing the Clojure code submitted to it.  You **must** provide a Java security policy file to the bot or else it
-will fail with numerous `java.security.AccessControlException: access denied` exceptions - the JVM's default policy when the
-security manager is enabled is too restrictive for the bot to function.
+This bot leverages the [clojails](https://github.com/Raynes/clojail) Clojure sandboxing library, which in turn leverages
+[Java's security manager capability](https://docs.oracle.com/javase/8/docs/technotes/guides/security/index.html).  Because the
+Java security manager mechanism is JVM-global, you **must** provide a Java security policy file in the startup parameters for
+the bot's JVM, or else it will fail with numerous `java.security.AccessControlException: access denied` exceptions.
 
-A [sample policy file is provided](https://github.com/pmonks/bot-clj/blob/master/.java.policy.sample) as an example - you can
-copy this file to your home directory to test the bot out, **but be aware that this policy does not restrict anything** (it is
-approximately equivalent to the JVM running without a security manager enabled).
+Note that the policy file you provide only applies to code running *outside* the clojail sandbox (the bot's own code).  For this
+reason the [sample policy file](https://github.com/pmonks/bot-clj/blob/master/.java.policy.sample) is deliberately lenient - this
+is the simplest way to ensure that all of the bot's code is allowed to function.
 
-While Clojure-level sandboxing is always used (via [clojails](https://github.com/Raynes/clojail)), it is recommended that the
-JVM security sandbox be carefully configured in production environments as well, to provide defence in depth.
+With that said, while clojail is well tested, there is always the possibility that code submitted to it will escape the sandbox.
+For this reason, in production environments it is recommended that the global policy file is carefully constructed, to provide
+defence in depth.
+
+Contributions of stronger policy files that don't interfere with the operation of the bot would be very welcome!
 
 ### Logging Configuration
 
