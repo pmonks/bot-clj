@@ -1,5 +1,5 @@
 ;
-; Copyright © 2016, 2017 Symphony Software Foundation
+; Copyright © 2017 Symphony Software Foundation
 ; SPDX-License-Identifier: Apache-2.0
 ;
 ; Licensed under the Apache License, Version 2.0 (the "License");
