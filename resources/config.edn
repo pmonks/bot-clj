@@ -19,7 +19,7 @@
     "port" #or [#env JOLOKIA_PORT "8778"]
   }
 
-  :evaluation-timeout #or [#env EVALUATION_TIMEOUT 10]
+  :evaluation-timeout #long #or [#env EVALUATION_TIMEOUT 10]
 
   :accept-connections-interval #long #or [#env ACCEPT_CONNECTIONS_INTERVAL 30]
 
