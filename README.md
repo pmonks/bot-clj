@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/pmonks/bot-clj.svg?branch=master)](https://travis-ci.org/pmonks/bot-clj)
+[![BCH compliance](https://bettercodehub.com/edge/badge/pmonks/bot-clj?branch=master)](https://bettercodehub.com/)
 [![Open Issues](https://img.shields.io/github/issues/pmonks/bot-clj.svg)](https://github.com/pmonks/bot-clj/issues)
 [![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/pmonks/bot-clj.svg)](http://isitmaintained.com/project/pmonks/bot-clj "Average time to resolve an issue")
 [![License](https://img.shields.io/github/license/pmonks/bot-clj.svg)](https://github.com/pmonks/bot-clj/blob/master/LICENSE)
