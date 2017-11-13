@@ -95,7 +95,8 @@
 (defn evaluate-message-and-post-result!!
   "If the given message starts with the ` character, evaluates the rest of the message as Clojure code in a secure sandbox and posts the response."
   [message-id stream-id text]
-  (if-let [plain-text (sym/to-plain-text text)]
+  (when-let [plain-text (s/trim (sym/to-plain-text text))]
+    (log/debug "Plain text is" plain-text)
     (if (s/starts-with? plain-text "`")
       (let [text-to-eval (subs plain-text 1)
             _            (log/debug "Evaluating" text-to-eval)
