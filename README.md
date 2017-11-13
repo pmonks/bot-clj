@@ -1,9 +1,9 @@
 [![Build Status](https://travis-ci.org/pmonks/bot-clj.svg?branch=master)](https://travis-ci.org/pmonks/bot-clj)
 [![BCH compliance](https://bettercodehub.com/edge/badge/pmonks/bot-clj?branch=master)](https://bettercodehub.com/)
 [![Open Issues](https://img.shields.io/github/issues/pmonks/bot-clj.svg)](https://github.com/pmonks/bot-clj/issues)
+[![Dependencies Status](https://versions.deps.co/pmonks/bot-clj/status.svg)](https://versions.deps.co/pmonks/bot-clj)
 [![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/pmonks/bot-clj.svg)](http://isitmaintained.com/project/pmonks/bot-clj "Average time to resolve an issue")
 [![License](https://img.shields.io/github/license/pmonks/bot-clj.svg)](https://github.com/pmonks/bot-clj/blob/master/LICENSE)
-<!--- [![Dependencies Status](http://jarkeeper.com/pmonks/bot-clj/status.svg)](http://jarkeeper.com/pmonks/bot-clj) -->
 
 # Clojure bot
 
