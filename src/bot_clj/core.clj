@@ -36,6 +36,6 @@
       (log/error e "Unexpected exception while processing message" message-id))))
 
 (defstate clj-bot-listener
-          :start (sym/register-listener   cnxn/symphony-connection process-message!)
-          :stop  (sym/deregister-listener cnxn/symphony-connection clj-bot-listener))
+          :start (sym/register-listener!   cnxn/symphony-connection process-message!)
+          :stop  (sym/deregister-listener! cnxn/symphony-connection clj-bot-listener))
 
