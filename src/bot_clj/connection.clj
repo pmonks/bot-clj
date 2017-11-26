@@ -33,6 +33,9 @@
 (defstate symphony-version
           :start (syc/version symphony-connection))
 
+(defstate bot-user
+          :start (syu/user symphony-connection))
+
 (defstate admins
           :start (let [result (map (partial syu/user symphony-connection) (:admin-emails cfg/config))]
                    (if (pos? (count result))
