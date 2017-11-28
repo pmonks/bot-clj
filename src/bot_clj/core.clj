@@ -30,8 +30,8 @@
   [{:keys [message-id timestamp stream-id user-id type text entity-data]}]
   (try
     (log/debug "Received message" message-id "from user" user-id "in stream" stream-id ":" text)
-    (if-not (cmd/process-admin-commands! user-id stream-id text entity-data)
-      (ev/evaluate-message-and-post-result!! message-id stream-id text))
+    (ev/evaluate-message-and-post-result!! message-id stream-id text)
+    (cmd/process-admin-commands! user-id stream-id text entity-data)
     (catch Exception e
       (log/error e "Unexpected exception while processing message" message-id))))
 

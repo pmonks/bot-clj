@@ -33,7 +33,7 @@
 
 (defn- status!
   "Provides status information about the bot."
-  [stream-id _ _]
+  [stream-id _]
   (let [now           (tm/now)
         uptime        (tm/interval cfg/boot-time now)
         last-reload   (tm/interval cfg/last-reload-time now)
@@ -53,7 +53,7 @@
 
 (defn- config!
   "Provides the current configuration of the bot."
-  [stream-id _ _]
+  [stream-id _]
   (let [now     (tm/now)
         message (str "<messageML>"
                      "<b>Clojure bot config as at " (u/date-as-string now) ":</b>"
@@ -63,7 +63,7 @@
 
 (defn- logs!
   "Posts the bot's current logs as a zip file."
-  [stream-id _ _]
+  [stream-id _]
   (let [tmp-zip-file (java.io.File/createTempFile "bot-clj-logs-" ".zip")
         log-files    (cfg/log-files)]
     (u/zip-files! tmp-zip-file log-files)
@@ -74,8 +74,8 @@
     (io/delete-file tmp-zip-file true)))
 
 (defn- reload-config!
-  "Reloads the configuration of the Clojure bot. The bot will be temporarily unavailable during this operation."
-  [stream-id _ _]
+  "Reloads the configuration of the bot. The bot will be temporarily unavailable during this operation."
+  [stream-id _]
   (sym/send-message! cnxn/symphony-connection
                      stream-id
                      (str "<messageML>Configuration reload initiated at "
@@ -88,7 +88,7 @@
 
 (defn- reset-interpreter!
   "Resets the Clojure interpreter."
-  [stream-id _ _]
+  [stream-id _]
   (ev/reset-sandbox!)
   (sym/send-message! cnxn/symphony-connection
                      stream-id
@@ -96,7 +96,7 @@
 
 (defn- garbage-collect!
   "Force JVM garbage collection."
-  [stream-id _ _]
+  [stream-id _]
   (sym/send-message! cnxn/symphony-connection
                      stream-id
                      (str "<messageML>Garbage collection initiated at " (u/now-as-string) ".</messageML>"))
@@ -117,30 +117,29 @@
     "reset"  #'reset-interpreter!
     "gc"     #'garbage-collect!
     "help"   #'help!
-    "?"      #'help!
   })
 
 (defn- help!
   "Displays this help message."
-  [stream-id _ _]
+  [stream-id _]
   (let [message (str "<messageML>"
                      "Administrative commands:"
-                     "<table>"
+                     "<p><table>"
                      "<tr><th>Command</th><th>Description</th></tr>"
                      (s/join (map #(str "<tr><td><b>" (key %) "</b></td><td>" (:doc (meta (val %))) "</td></tr>") (sort-by key commands)))
-                     "</table>"
+                     "</table></p>"
                      "</messageML>")]
     (sym/send-message! cnxn/symphony-connection stream-id message)))
 
 (defn- process-command!
   "Looks for given command in the message text, exeucting it and returning true if it was found, false otherwise."
-  [from-user-id stream-id text plain-text [command-name command-fn]]
-  (if (s/starts-with? plain-text command-name)
+  [from-user-id stream-id text token]
+  (if-let [command-fn (get commands token)]
     (do
-      (log/debug "Admin command" command-name
+      (log/debug "Admin command" token
                  "requested by" (:email-address (syu/user cnxn/symphony-connection from-user-id))
                  "in stream" stream-id)
-      (command-fn stream-id text plain-text)
+      (command-fn stream-id text)
       true)
     false))
 
@@ -152,6 +151,6 @@
            (or (= :IM (sys/stream-type cnxn/symphony-connection stream-id))  ; Message is a 1:1 chat with the bot, OR
                (some #(= (syu/user-id cnxn/bot-user) %)                      ; Bot user is @mention'ed in the message
                      (sym/mentions {:entity-data entity-data}))))
-    (let [plain-text (s/lower-case (s/trim (sym/to-plain-text text)))]
-      (boolean (some identity (map (partial process-command! from-user-id stream-id text plain-text) commands))))
+    (let [tokens (sym/tokens text)]
+      (boolean (some identity (doall (map (partial process-command! from-user-id stream-id text) tokens)))))
     false))
