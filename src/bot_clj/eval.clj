@@ -59,7 +59,7 @@
   [s]
   (try
     (with-open [out (java.io.StringWriter.)
-              err (java.io.StringWriter.)]
+                err (java.io.StringWriter.)]
       (let [form   (binding [*read-eval* false] (read-string s))
             result (sandbox form {#'*out* out #'*err* err})]
         {
@@ -80,15 +80,15 @@
 
 (defn- send-evaluation-result-message!
   [stream-id eval-result]
-  (let [message (str "<messageML>"
+  (let [message (str "<messageML><br/>"
                      (if (not (s/blank? (:err eval-result)))
-                       (str "<pre>" (:err eval-result) "</pre>"))
+                       (str "<p><pre>" (:err eval-result) "</pre></p>"))
                      (if (not (s/blank? (:out eval-result)))
-                       (str "<pre>" (:out eval-result) "</pre>"))
+                       (str "<p><pre>" (:out eval-result) "</pre></p>"))
                      (if (not (s/blank? (:result-str eval-result)))
-                       (str "<pre>" (:result-str eval-result) "</pre>"))
+                       (str "<p><pre>" (:result-str eval-result) "</pre></p>"))
                      (if (not (s/blank? (:error-message eval-result)))
-                       (str "<pre>" (:error-message eval-result) "</pre>"))
+                       (str "<p><pre>" (:error-message eval-result) "</pre></p>"))
                      "</messageML>")]
     (sym/send-message! cnxn/symphony-connection stream-id message)))
 
