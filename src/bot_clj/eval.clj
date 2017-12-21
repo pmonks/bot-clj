@@ -82,13 +82,13 @@
   [stream-id eval-result]
   (let [message (str "<messageML><br/>"
                      (if (not (s/blank? (:err eval-result)))
-                       (str "<p><pre>" (:err eval-result) "</pre></p>"))
+                       (str "<p><pre>" (sym/escape (:err eval-result)) "</pre></p>"))
                      (if (not (s/blank? (:out eval-result)))
-                       (str "<p><pre>" (:out eval-result) "</pre></p>"))
+                       (str "<p><pre>" (sym/escape (:out eval-result)) "</pre></p>"))
                      (if (not (s/blank? (:result-str eval-result)))
-                       (str "<p><pre>" (:result-str eval-result) "</pre></p>"))
+                       (str "<p><pre>" (sym/escape (:result-str eval-result)) "</pre></p>"))
                      (if (not (s/blank? (:error-message eval-result)))
-                       (str "<p><pre>" (:error-message eval-result) "</pre></p>"))
+                       (str "<p><pre>" (sym/escape (:error-message eval-result)) "</pre></p>"))
                      "</messageML>")]
     (sym/send-message! cnxn/symphony-connection stream-id message)))
 
