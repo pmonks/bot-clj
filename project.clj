@@ -15,7 +15,7 @@
 ; limitations under the License.
 ;
 
-(def jackson-version "2.9.2")
+(def jackson-version "2.9.3")
 
 (defproject org.symphonyoss.symphony/bot-clj "0.1.0-SNAPSHOT"
   :description      "A bot that looks for Clojure code in messages, and executes it, returning the result."
@@ -23,14 +23,14 @@
   :license          {:spdx-license-identifier "Apache-2.0"
                      :name                    "Apache License, Version 2.0"
                      :url                     "http://www.apache.org/licenses/LICENSE-2.0"}
-  :min-lein-version "2.7.0"
+  :min-lein-version "2.8.1"
   :repositories     [["sonatype-snapshots" {:url "https://oss.sonatype.org/content/groups/public" :snapshots true}]
                      ["jitpack"            {:url "https://jitpack.io"}]]
   :plugins          [
                       [org.noisesmith/git-info-edn "0.2.1"]
                     ]
   :dependencies     [
-                      [org.clojure/clojure              "1.8.0"]
+                      [org.clojure/clojure              "1.9.0"]
                       [org.apache.commons/commons-lang3 "3.7"]
                       [aero                             "1.1.2"]
                       [mount                            "0.1.11"]
@@ -44,8 +44,8 @@
                       [org.jolokia/jolokia-jvm          "1.3.7" :classifier "agent"]
                       [clj-time                         "0.14.2"]
                       [clojail                          "1.0.6"]
-                      [org.symphonyoss/clj-symphony     "0.3.0-SNAPSHOT" :exclusions [org.clojure/clojure
-                                                                                      org.slf4j/slf4j-log4j12]]
+                      [org.symphonyoss/clj-symphony     "0.3.0" :exclusions [org.clojure/clojure
+                                                                             org.slf4j/slf4j-log4j12]]
 
                       ; The following dependencies are inherited but have conflicting versions, so we "pin" the versions here
                       [com.fasterxml.jackson.core/jackson-core                      ~jackson-version]
@@ -59,11 +59,15 @@
                       [joda-time/joda-time                                          "2.9.9"]
                       [org.hamcrest/hamcrest-core                                   "1.3"]
                     ]
-  :profiles         {:dev {:dependencies [[midje         "1.9.0"]]
+  :profiles         {:dev {:dependencies [[midje         "1.9.1"]]
                            :plugins      [[lein-midje    "3.2.1"]
-                                          [lein-licenses "0.2.1"]]}
+                                          [lein-licenses "0.2.2"]]}
                      :uberjar {:aot          :all
                                :uberjar-name "bot-clj-standalone.jar"}}
+  :jvm-opts         ~(let [version     (System/getProperty "java.version")
+                           [major _ _] (clojure.string/split version #"\.")]
+                       (if (= major "9")
+                         ["--add-modules" "java.xml.bind"]
+                         []))
   :main             bot-clj.main
-;  :jvm-opts         ["" ""]
   )
