@@ -15,7 +15,7 @@
 ; limitations under the License.
 ;
 
-(def jackson-version "2.9.3")
+(def jackson-version "2.9.4")
 
 (defproject org.symphonyoss.symphony/bot-clj "0.1.0-SNAPSHOT"
   :description      "A bot that looks for Clojure code in messages, and executes it, returning the result."
@@ -40,8 +40,8 @@
                       [org.slf4j/jcl-over-slf4j         "1.7.25"]
                       [org.slf4j/log4j-over-slf4j       "1.7.25"]
                       [org.slf4j/jul-to-slf4j           "1.7.25"]
-                      [org.jolokia/jolokia-jvm          "1.3.7"]
-                      [org.jolokia/jolokia-jvm          "1.3.7" :classifier "agent"]
+                      [org.jolokia/jolokia-jvm          "1.4.0"]
+                      [org.jolokia/jolokia-jvm          "1.4.0" :classifier "agent"]
                       [clj-time                         "0.14.2"]
                       [clojail                          "1.0.6"]
                       [org.symphonyoss/clj-symphony     "0.3.0" :exclusions [org.clojure/clojure
