@@ -44,7 +44,7 @@
                       [org.jolokia/jolokia-jvm          "1.5.0" :classifier "agent"]
                       [clj-time                         "0.14.2"]
                       [clojail                          "1.0.6"]
-                      [org.symphonyoss/clj-symphony     "0.5.0" :exclusions [org.clojure/clojure
+                      [org.symphonyoss/clj-symphony     "0.7.0" :exclusions [org.clojure/clojure
                                                                              org.slf4j/slf4j-log4j12]]
 
                       ; The following dependencies are inherited but have conflicting versions, so we "pin" the versions here
