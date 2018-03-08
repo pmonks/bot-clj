@@ -17,7 +17,7 @@
 
 ; Workaround for https://dev.clojure.org/jira/browse/CLJ-2253
 
-(ns bot-clj.CLJ-2253
+(ns CLJ-2253
   (:require [clojure.java.io :as io]))
 
 (defmacro base64-encode
