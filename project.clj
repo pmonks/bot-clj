@@ -1,5 +1,5 @@
 ;
-; Copyright © 2017 Symphony Software Foundation
+; Copyright 2017 Fintech Open Source Foundation
 ; SPDX-License-Identifier: Apache-2.0
 ;
 ; Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,7 +18,7 @@
 (def jackson-version "2.9.4")
 (def jersey-version  "2.25.1")     ; Note: upgrading past 2.25.x breaks Jackson
 
-(defproject org.symphonyoss.symphony/bot-clj "0.1.0-SNAPSHOT"
+(defproject org.finos.symphony/bot-clj "0.1.0-SNAPSHOT"
   :description      "A bot that looks for Clojure code in messages, and executes it, returning the result."
   :url              "https://github.com/pmonks/bot-clj"
   :license          {:spdx-license-identifier "Apache-2.0"
