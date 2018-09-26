@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/pmonks/bot-clj.svg?branch=master)](https://travis-ci.org/pmonks/bot-clj)
+[![Build Status](https://travis-ci.com/pmonks/bot-clj.svg?branch=master)](https://travis-ci.com/pmonks/bot-clj)
 [![BCH compliance](https://bettercodehub.com/edge/badge/pmonks/bot-clj?branch=master)](https://bettercodehub.com/)
 [![Open Issues](https://img.shields.io/github/issues/pmonks/bot-clj.svg)](https://github.com/pmonks/bot-clj/issues)
 [![Dependencies Status](https://versions.deps.co/pmonks/bot-clj/status.svg)](https://versions.deps.co/pmonks/bot-clj)
