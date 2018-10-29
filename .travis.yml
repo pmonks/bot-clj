@@ -4,15 +4,19 @@ lein: 2.8.1
 jdk:
   - oraclejdk8
   - oraclejdk9
-  - oraclejdk10
-  - oraclejdk11
+  - openjdk10
+  - openjdk11   # Don't fall for Oracle's trick: https://blog.joda.org/2018/09/do-not-fall-into-oracles-java-11-trap.html
 
-env:
-  global:
-    # Encrypted OC_TOKEN for deploying to OpenShift
+#env:
+#  global:
+#    # Encrypted OC_TOKEN for deploying to OpenShift
 #    - secure: ""
-    # Encrypted WHITESOURCE_TOKEN for updating Whitesource licensing information
+#    # Encrypted WHITESOURCE_TOKEN for updating Whitesource licensing information
 #    - secure: ""
+
+# Workaround for TravisCI's garbage openjdk10 base image
+before_install:
+  - if [[ $JAVA_HOME == *openjdk10* ]]; then rm "${JAVA_HOME}/lib/security/cacerts"; ln -s /etc/ssl/certs/java/cacerts "${JAVA_HOME}/lib/security/cacerts"; fi
 
 script: lein do git-info-edn, check
 
