@@ -31,10 +31,10 @@
                       [org.noisesmith/git-info-edn "0.2.1"]
                     ]
   :dependencies     [
-                      [org.clojure/clojure              "1.9.0"]
+                      [org.clojure/clojure              "1.10.0"]
                       [org.apache.commons/commons-lang3 "3.8.1"]
                       [aero                             "1.1.3"]
-                      [mount                            "0.1.14"]
+                      [mount                            "0.1.15"]
                       [org.clojure/tools.cli            "0.4.1"]
                       [org.clojure/tools.logging        "0.4.1"]
                       [ch.qos.logback/logback-classic   "1.2.3"]
@@ -45,9 +45,9 @@
                       [org.jolokia/jolokia-jvm          "1.6.0" :classifier "agent"]
                       [clj-time                         "0.15.1"]
                       [clojail                          "1.0.6"]
-                      [org.clojars.pmonks/clj-2253      "0.1.0"  :exclusions [org.clojure/clojure]]
-                      [org.symphonyoss/clj-symphony     "0.10.0" :exclusions [org.clojure/clojure
-                                                                              org.slf4j/slf4j-log4j12]]
+                      [org.clojars.pmonks/clj-2253      "0.1.0" :exclusions [org.clojure/clojure]]
+                      [org.symphonyoss/clj-symphony     "1.0.0" :exclusions [org.clojure/clojure
+                                                                             org.slf4j/slf4j-log4j12]]
 
                       ; The following dependencies are inherited but have conflicting versions, so we "pin" the versions here
                       [com.fasterxml.jackson.core/jackson-core                      ~jackson-version]
@@ -64,7 +64,7 @@
                       [org.glassfish.jersey.core/jersey-common                      ~jersey-version]
                       [org.glassfish.jersey.media/jersey-media-json-jackson         ~jersey-version]
                       [joda-time/joda-time                                          "2.10.1"]
-                      [org.hamcrest/hamcrest-core                                   "1.3"]
+                      [org.hamcrest/hamcrest-core                                   "2.1"]
                     ]
   :profiles         {:dev {:dependencies [[midje         "1.9.4"]]
                            :plugins      [[lein-midje    "3.2.1"]
