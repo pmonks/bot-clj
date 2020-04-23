@@ -28,7 +28,7 @@
   :repositories     [["sonatype-snapshots" {:url "https://oss.sonatype.org/content/groups/public" :snapshots true}]
                      ["jitpack"            {:url "https://jitpack.io"}]]
   :plugins          [
-                      [org.noisesmith/git-info-edn "0.2.1"]
+                      [org.noisesmith/git-info-edn "0.2.2"]
                     ]
   :dependencies     [
                       [org.clojure/clojure              "1.10.1"]
@@ -46,7 +46,7 @@
                       [clj-time                         "0.15.2"]
                       [clojail                          "1.0.6"]
                       [org.clojars.pmonks/clj-2253      "0.1.0" :exclusions [org.clojure/clojure]]
-                      [org.symphonyoss/clj-symphony     "1.0.0" :exclusions [org.clojure/clojure
+                      [org.symphonyoss/clj-symphony     "1.0.1" :exclusions [org.clojure/clojure
                                                                              org.slf4j/slf4j-log4j12]]
 
                       ; The following dependencies are inherited but have conflicting versions, so we "pin" the versions here
