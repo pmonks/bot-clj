@@ -44,7 +44,7 @@
                       [org.jolokia/jolokia-jvm          "1.6.2"]
                       [org.jolokia/jolokia-jvm          "1.6.2" :classifier "agent"]
                       [clj-time                         "0.15.2"]
-                      [clojail                          "1.0.6"]
+                      [juji/clojail                     "1.0.9" :exclusions [org.clojure/clojure]]
                       [org.clojars.pmonks/clj-2253      "0.1.0" :exclusions [org.clojure/clojure]]
                       [org.symphonyoss/clj-symphony     "1.0.1" :exclusions [org.clojure/clojure
                                                                              org.slf4j/slf4j-log4j12]]
