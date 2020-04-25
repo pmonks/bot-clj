@@ -1,35 +1,8 @@
-sudo: false
 language: clojure
-lein: 2.8.1
-jdk:
-  - openjdk8    # oraclejdk8 no longer supported by TravisCI (or Oracle)
-  - openjdk11   # Don't fall for Oracle's trick: https://blog.joda.org/2018/09/do-not-fall-into-oracles-java-11-trap.html
-
-#env:
-#  global:
-#    # Encrypted OC_TOKEN for deploying to OpenShift
-#    - secure: ""
-#    # Encrypted WHITESOURCE_TOKEN for updating Whitesource licensing information
-#    - secure: ""
-
-# Workaround for TravisCI's garbage openjdk10 base image
-before_install:
-  - if [[ $JAVA_HOME == *openjdk10* ]]; then rm "${JAVA_HOME}/lib/security/cacerts"; ln -s /etc/ssl/certs/java/cacerts "${JAVA_HOME}/lib/security/cacerts"; fi
+lein: 2.9.3
+jdk:  # We only use OpenJDKs because of these shenanigans: https://blog.joda.org/2018/09/do-not-fall-into-oracles-java-11-trap.html
+  - openjdk8
+  - openjdk11
+  - openjdk14
 
 script: lein do git-info-edn, check
-
-#deploy:
-#  # Deploy binaries to OpenShift
-#  - provider: script
-#    skip_cleanup: true
-#    script: lein do git-info-edn, uberjar && mkdir -p target/oc && cp target/*-standalone.jar target/oc/ && ./deploy-to-openshift.sh $TRAVIS_BRANCH $TRAVIS_PULL_REQUEST
-#    on:
-#      all_branches: true
-#      jdk: oraclejdk11
-#  # Update Whitesource
-#  - provider: script
-#    skip_cleanup: true
-#    script: lein pom && mvn org.whitesource:whitesource\-maven\-plugin:18.6.2:update -Dorg.whitesource.orgToken=$WHITESOURCE_TOKEN -Dorg.whitesource.ignoredScopes=test,runtime,provided,system
-#    on:
-#      branch: master
-#      jdk: oraclejdk11
